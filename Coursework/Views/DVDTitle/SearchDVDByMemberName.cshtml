@@ -1,0 +1,92 @@
+﻿@* @model System.Collections.Generic.List<Coursework.Models.Loan> *@
+@* *@
+@* @{ *@
+@*     ViewBag.Title = "Search DVD By Member Name"; *@
+@*     Layout = "_Layout"; *@
+@* } *@
+@* *@
+@* <h2>Search DVD By Member Name</h2> *@
+@* *@
+@* <table> *@
+@*     <thead> *@
+@*     <tr> *@
+@*         <th>DVD Title</th> *@
+@*         <th>Copy Number</th> *@
+@*     </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@*     $1$ @foreach (var item in Model) #1# *@
+@*     $1$ { #1# *@
+@*     $1$     <tr> #1# *@
+@*     $1$         <td>@item.DvdCopy.DvdTitle</td> #1# *@
+@*     $1$         <td>@item.DvdCopy.CopyNumber</td> #1# *@
+@*     $1$     </tr> #1# *@
+@*     $1$ } #1# *@
+@*     </tbody> *@
+@* </table> *@
+
+
+@{
+    ViewData["Title"] = "Index";
+    var member = (Member)ViewData["results"];
+    var loans = (IEnumerable<Loan>)ViewData["loans"];
+}
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            MemberNumber
+        </th>
+        <th>
+            DVD Number
+        </th>
+        <th>
+            Title 
+        </th>
+        <th>
+            DVD Returned?
+        </th>
+        <th>
+            Copy Number
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in loans)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem=> item.Member.MemberNumber)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem=> item.DvdCopy.DVDNumber)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem=> item.DvdCopy.DvdTitle.DvdTitle)
+            </th>
+            <th>
+                @if (item.DateReturned == null)
+                {
+                    @Html.Encode("No")
+                }
+                else {
+                    @Html.Encode("Yes")
+                }
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem=> item.DvdCopy.CopyNumber)
+            </th>
+        </tr>
+    }
+    </tbody>
+</table>
+

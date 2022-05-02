@@ -1,0 +1,32 @@
+﻿@model System.Collections.Generic.List<Coursework.Models.DVDTitle>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>DVD Details</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Dvd Title</th>
+        <th>Studio Name</th>
+        <th>Producer Name</th>
+        <th>Cast Members</th>
+        <th>Release Date</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.DvdTitle</td>
+            <td>@item.Studio.StudioName</td>
+            <td>@item.Producer.ProducerName</td>
+            <td>@item.actors</td>
+            <td>@item.DateReleased</td>
+        </tr>
+    }
+    </tbody>
+</table>
